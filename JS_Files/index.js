@@ -10,6 +10,11 @@ document.querySelector("#button_part1").onclick = function () {
         alert("Заполните все поля!");
     }
 
+    else if (age < 0)
+    {
+        alert("Возраст не может быть отрицательным!");
+    }
+
     else
     {
         if (age < 7)
@@ -39,8 +44,13 @@ document.querySelector("#button_part2").onclick = function () {
 
     else
     {
-        let result = delimoe % delitel
-        alert("Остаток от деления числа " + delimoe + " на " + delitel + " равен: " + result);
+        if (delitel != 0) {
+            let result = delimoe % delitel
+            alert("Остаток от деления числа " + delimoe + " на " + delitel + " равен: " + result);
+        }
+        else {
+            alert("Делитель не может равняться нулю.")
+        }
     }
 }
 
@@ -96,27 +106,72 @@ document.querySelector("#button_part4").onclick = function () {
     let vysota_vag = document.getElementById("input_vysota_vag").value
     let count_delivery = document.getElementById("input_count_delivery").value
 
-    const shirina_box = 30
-    const dlina_box = 50
-    const vysota_box = 40
-    const v_delivery = (shirina_box + 10) * (dlina_box + 10) * (vysota_box + 10)
-
     if (!shirina_vag || !dlina_vag || !vysota_vag || !count_delivery)
     {
         alert("Заполните все поля!")
     }
-
     else if (shirina_vag <= 0 || dlina_vag <= 0 || vysota_vag <= 0 || count_delivery <= 0)
     {
         alert("Введите значения, которые больше 0.")
     }
-
-    else {
-        let v_vag = shirina_vag * dlina_vag * vysota_vag
-
-        let max_count_delivery = Math.floor(v_vag / v_delivery)
-        let count_vag = Math.ceil(count_delivery / max_count_delivery)
-
-        alert("Для отправки всех заказов вам понадобится вагонов: " + count_vag)
+    else
+    {
+        if (result(dlina_vag, shirina_vag, vysota_vag) == 0)
+        {
+            alert("Коробка не поместится в вагон.");
+        }
+        else
+        {
+            alert("Для такого количества заказов потребуется: " + Math.ceil(count_delivery / result(dlina_vag, shirina_vag, vysota_vag)) + " вагона(-ов).");
+        }
     }
 }
+
+function result(vag_dl, vag_sh, vag_vy)
+{
+    let result_count;
+    result_count = Math.max(count(vag_dl, vag_sh, vag_vy, 30, 40,50), count(vag_dl, vag_sh, vag_vy, 30, 50,40), count(vag_dl, vag_sh, vag_vy, 40, 30,50), count(vag_dl, vag_sh, vag_vy, 40, 50,30), count(vag_dl, vag_sh, vag_vy, 50, 40,30), count(vag_dl, vag_sh, vag_vy, 50, 30,40));
+    return result_count;
+}
+
+function count(vag_dl, vag_sh, vag_vy, box_dl, box_sh, box_vy)
+{
+    let count_dl = count_box(vag_dl, box_dl);
+    let count_sh = count_box(vag_sh, box_sh);
+    let count_vy = count_box(vag_vy, box_vy);
+    return count_dl * count_sh * count_vy;
+}
+
+
+
+function count_box(vag, box)
+{
+    let result;
+    for (result = 0; vag > 0; result++)
+    {
+        if (result == 0)
+        {
+            if (vag >= box)
+            {
+                vag -= box;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            if (vag >= box + 5)
+            {
+                vag -= box + 5;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    return result;
+}
+
