@@ -1,3 +1,5 @@
+var zad1 = false;
+var zad2 = false;
 // 1
 document.querySelector("#button_part1").onclick = function () {
     var result_1 = document.getElementById("result1")
@@ -7,10 +9,14 @@ document.querySelector("#button_part1").onclick = function () {
         {name: "Гена", age: 56},
         {name: "Алёна", age: 18}
     ];
-    let res = getNameAge(users);
-    for (let i = 0; i < users.length; i++)
+    if (zad1 == false)
     {
-        result_1.innerHTML += res[i] + "<br>";
+        let res = getNameAge(users);
+        for (let i = 0; i < users.length; i++)
+        {
+            result_1.innerHTML += res[i] + "<br>";
+        }
+        zad1 = true;
     }
 }
 
@@ -23,13 +29,26 @@ document.querySelector("#button_part2").onclick = function () {
         {name: "Tomas", color: "Blue", sex: "F", age: 3},
         {name: "Tomas", color: "Orange", sex: "F", age: 6},
     ]
-    result_2.appendChild(tableBuild(cats_1));
+    if (zad2 == false)
+    {
+        result_2.appendChild(tableBuild(cats_1));
+        zad2 = true;
+    }
 }
 
 // 3
 document.querySelector("#button_part3").onclick = function () {
     var result_3 = document.getElementById("result3");
-    let number = [1, 2, 3, 4, 5, 6];
+    var inputarr = document.getElementById("input_arr").value;
+    let number = inputarr.split(",").map(function (item)
+    {
+        return parseFloat(item.trim());
+    });
+    if (number.some(isNaN))
+    {
+        alert ("Пожалуйста, введите только числа, разделённые запятыми.")
+        return;
+    }
 
     result_3.innerText = umnozhNumber(number);
 }
@@ -37,8 +56,16 @@ document.querySelector("#button_part3").onclick = function () {
 // 4
 document.querySelector("#button_part4").onclick = function () {
     var result_4 = document.getElementById("result4");
-    let number_2 = [1, 2, 3, 4, 5, 6];
-
+    var inputarr2 = document.getElementById("input_arr2").value;
+    let number_2 = inputarr2.split(",").map(function (item)
+    {
+        return parseFloat(item.trim());
+    });
+    if (number_2.some(isNaN))
+    {
+        alert ("Пожалуйста, введите только числа, разделённые запятыми.")
+        return;
+    }
     result_4.innerText = sumNumber(number_2);
 }
 
@@ -46,27 +73,27 @@ document.querySelector("#button_part4").onclick = function () {
 
 document.querySelector("#button_part5").onclick = function () {
     var result_5 = document.getElementById("result5");
-    var start = parseInt(document.getElementById("input_start").value);
-    var finish = parseInt(document.getElementById("input_finish").value);
-    var step = parseInt(document.getElementById("input_step").value);
+    var start = parseFloat(document.getElementById("input_start").value);
+    var finish = parseFloat(document.getElementById("input_finish").value);
+    var step = parseFloat(document.getElementById("input_step").value);
     if (isNaN(start)|| isNaN(finish))
     {
         alert("Заполните поля!");
     }
-    else if (!step || step == 0)
+    else if (!step || step == parseFloat(0))
     {
         document.getElementById("input_step").value = 1;
-        step = parseInt(document.getElementById("input_step").value);
+        step = parseFloat(document.getElementById("input_step").value);
         alert ("Поле с шагом не было заполнено или значение поля равно нулю. Присовено значение: 1. Нажмите на кнопку снова.");
     }
     else
     {
-        if (parseInt(start) > parseInt(finish))
+        if (parseFloat(start) > parseFloat(finish))
         {
             document.getElementById("input_start").value = finish;
             document.getElementById("input_finish").value = start;
-            start = parseInt(document.getElementById("input_start").value);
-            finish = parseInt(document.getElementById("input_finish").value);
+            start = parseFloat(document.getElementById("input_start").value);
+            finish = parseFloat(document.getElementById("input_finish").value);
             result_5.innerHTML = goRange(start, finish, step) + ". Сумма всех элементов: " + sum(goRange(start, finish, step));
         }
         else if (start < finish)
@@ -240,11 +267,11 @@ function goRange(start, finish, step)
     let arr = [];
     if (step > 0)
     {
-        arr[0] = parseInt(start);
+        arr[0] = parseFloat(start);
         while (start <= finish && start + step <= finish)
         {
-            arr[temp] = parseInt(start) + parseInt(step);
-            start = parseInt(start) + parseInt(step);
+            arr[temp] = parseFloat(start) + parseFloat(step);
+            start = parseFloat(start) + parseFloat(step);
             temp++;
         }
         return arr;
@@ -252,11 +279,11 @@ function goRange(start, finish, step)
     else if (step < 0)
     {
         step *= -1;
-        arr[0] = parseInt(finish);
+        arr[0] = parseFloat(finish);
         while (finish >= start && finish - step >= start)
         {
-            arr[temp] = parseInt(finish) - parseInt(step);
-            finish = parseInt(finish) - parseInt(step);
+            arr[temp] = parseFloat(finish) - parseFloat(step);
+            finish = parseFloat(finish) - parseFloat(step);
             console.log(arr)
             temp++;
         }

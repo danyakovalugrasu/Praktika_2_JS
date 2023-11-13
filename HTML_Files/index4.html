@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная №5. DOM</title>
+
+    <style>
+        .z6 {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .z7 {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .green {
+            background-color: green;
+        }
+
+        .autocomplete {
+            display: inline-block;
+        }
+
+        .autocomplete-suggestions {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .autocomplete-suggestion {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: black;
+        }
+        .autocomplete-suggestion:hover {
+            background-color: #f1f1f1;
+        }
+
+        #mouse-trail {
+            position: absolute;
+            pointer-events: none;
+        }
+        .trail-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #00f;
+            border-radius: 50%;
+            opacity: 0.25;
+        }
+
+        .draggable {
+            width: 150px;
+            height: 50px;
+            background-color: #3498db;
+            color: #ffffff;
+            text-align: center;
+            line-height: 50px;
+            position: absolute;
+            cursor: grab;
+        }
+    </style>
+
+</head>
+<nav>
+    <div>
+        <a href = "index.html">lab1_js</a>
+        &nbsp;
+        <a href = "index2.html">lab2_js</a>
+        &nbsp;
+        <a href = "index3.html">lab3_js</a>
+        &nbsp;
+        <a href = "index4.html">lab4_js</a>
+        &nbsp;
+        <a href = "index4_game.html">lab4_game_js</a>
+        &nbsp;
+        <a href = "index5.html">lab5_js</a>
+    </div>
+</nav>
+<body>
+    <h3>Задание 1, 2.</h3>
+    <div id="zad1">
+
+    </div>
+
+    <h3>Задание 3.</h3>
+    <div id="zad3">
+
+    </div>
+
+    <h3>Задание 4.</h3>
+    <div id="zad4">
+
+    </div>
+
+    <h3>Задание 5.</h3>
+    <div id="zad5">
+
+    </div>
+
+    <h3>Задание 6.</h3>
+    <div class="z6" onmouseover="changeColor(this)" onmouseout="changeColor(this)"></div>
+
+    <h3>Задание 7.</h3>
+    <div class="z7" onclick="toggleColor(this)"></div>
+    &nbsp;
+    <div class="z7" onclick="toggleColor(this)"></div>
+    &nbsp;
+    <div class="z7" onclick="toggleColor(this)"></div>
+
+    <h3>Задание 8.</h3>
+    <div class="autocomplete">
+        <input type="text" id="myInput" onkeyup="autocompletefunc()">
+        <div class="autocomplete-suggestions" id="mySuggestions"></div>
+    </div>
+
+    <!--Задание 9.1-->
+    <div id="mouse-trail"></div>
+    <!--Задание 9.2-->
+    <h3>Задание 9.2</h3>
+    <div id="drag-me" class="draggable">Подвинь меня</div>
+
+
+
+
+
+
+
+    <script src="../JS_Files/index4.js"></script>
+</body>
+</html>
